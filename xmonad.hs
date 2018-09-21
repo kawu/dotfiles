@@ -34,6 +34,4 @@ main = do
 
     -- toggle showing xmobar
     , ((mod4Mask, xK_b), sendMessage Docks.ToggleStruts)
-
-    , ((mod4Mask, xK_b), sendMessage Docks.ToggleStruts)
     ]
