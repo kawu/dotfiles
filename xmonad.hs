@@ -4,7 +4,9 @@ import qualified XMonad.Hooks.DynamicLog as Log
 import qualified XMonad.Hooks.ManageDocks as Docks
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.EZConfig (additionalKeys)
+import qualified XMonad.Layout.IndependentScreens as LIS
 import qualified Graphics.X11.ExtraTypes.XF86 as XF86
+
 import System.IO (hPutStrLn)
 
 main = do
@@ -30,5 +32,8 @@ main = do
 
     , ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
 
-    , ((mod4Mask, xK_b     ), sendMessage Docks.ToggleStruts)
+    -- toggle showing xmobar
+    , ((mod4Mask, xK_b), sendMessage Docks.ToggleStruts)
+
+    , ((mod4Mask, xK_b), sendMessage Docks.ToggleStruts)
     ]

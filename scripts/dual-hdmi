@@ -1,0 +1,27 @@
+#!/bin/bash
+
+usage()
+{
+script=${0##*/}
+echo
+echo "Invalid usage of ${script}!"
+echo "  $1"
+echo "----------------"
+echo "$script on     : turn HDMI on"
+echo "$script off    : turn HDMI off"
+echo "----------------"
+echo
+
+exit 1
+}
+
+case "$1" in
+  off)
+    xrandr --output HDMI-2 --off
+    ;;
+  on)
+    xrandr --output HDMI-2 --auto --right-of eDP-1
+    ;;
+  *)
+    usage "invalid argument"
+esac
