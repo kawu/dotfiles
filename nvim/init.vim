@@ -4,7 +4,10 @@
 call plug#begin('~/.local/share/nvim/plugged')
 " Make sure you use single quotes
 Plug 'neovimhaskell/haskell-vim'
+Plug 'junegunn/fzf', {'dir': '~/.fzf', 'do': './install --bin'}
+Plug 'junegunn/fzf.vim'
 " Plug 'ndmitchell/ghcid', {'rtp': 'plugins/nvim'}
+Plug 'scrooloose/nerdtree'
 call plug#end()
 
 syntax on
@@ -30,6 +33,9 @@ set laststatus=0
 " hi Comment ctermfg=2*
 " hi Normal ctermbg=none
 " hi LineNr ctermfg=darkgrey
+
+" NERDTree Toggle
+map <C-n> :NERDTreeToggle<CR>
  
 " " haskell-vim
 " let g:haskell_classic_highlighting = 1
