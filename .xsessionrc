@@ -1,46 +1,50 @@
 #!/bin/bash
- 
-# Load resources
- 
-xrdb -merge .Xresources
- 
-# Set up an icon tray
- 
-trayer --edge top \
- --SetDockType true --SetPartialStrut true \
- --expand true \
- --align right \
- --width 10 \
- --height 17 \
- --alpha 0 \
- --tint 0x0 \
- --transparent true &
 
-# --tint 0x191970 \
-# --height 12 &
-# --transparent true \
-# --align right \
-# --width 10 \
- 
-# Set the background color<
- 
-feh --bg-scale /usr/share/backgrounds/Beaver_Wallpaper_Grey_4096x2304.png &
-# xsetroot -solid midnightblue
-
-# Start udiskie to handle media
-# udiskie &
- 
-# Screen saver
-xscreensaver -no-splash &
- 
-# Wifi applet
-if [ -x /usr/bin/nm-applet ] ; then
-   nm-applet --sm-disable &
-fi
- 
-# if [ -x /usr/bin/xfce4-power-manager ] ; then
-#    sleep 3
-#    xfce4-power-manager &
-# fi
- 
-exec xmonad
+case "$STARTUP" in
+  xmonad-session) 
+    # Load resources
+    xrdb -merge .Xresources
+     
+    # Set up an icon tray
+    trayer --edge top \
+     --SetDockType true --SetPartialStrut true \
+     --expand true \
+     --align right \
+     --width 10 \
+     --height 17 \
+     --alpha 0 \
+     --tint 0x0 \
+     --transparent true &
+    
+    # --tint 0x191970 \
+    # --height 12 &
+    # --transparent true \
+    # --align right \
+    # --width 10 \
+     
+    # Set the background color<
+    feh --bg-scale /usr/share/backgrounds/Beaver_Wallpaper_Grey_4096x2304.png &
+    # xsetroot -solid midnightblue
+    
+    # Start udiskie to handle media
+    udiskie --tray &
+     
+    # Screen saver
+    xscreensaver -no-splash &
+     
+    # Wifi applet
+    if [ -x /usr/bin/nm-applet ] ; then
+       nm-applet --sm-disable &
+    fi
+     
+    # if [ -x /usr/bin/xfce4-power-manager ] ; then
+    #    sleep 3
+    #    xfce4-power-manager &
+    # fi
+     
+    exec xmonad
+    ;;
+  *) 
+    : # do nothing
+    ;;
+esac

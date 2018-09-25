@@ -6,6 +6,7 @@ import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.EZConfig (additionalKeys)
 import qualified XMonad.Layout.IndependentScreens as LIS
 import qualified Graphics.X11.ExtraTypes.XF86 as XF86
+import qualified XMonad.Actions.NoBorders as NoBorders
 
 import System.IO (hPutStrLn)
 
@@ -13,7 +14,8 @@ main = do
   xmproc <- spawnPipe "xmobar"
   xmonad $ Docks.docks def
     { manageHook = Docks.manageDocks <+> manageHook defaultConfig
-    , layoutHook = Docks.avoidStruts  $  layoutHook defaultConfig
+    , layoutHook = Docks.avoidStruts $ layoutHook defaultConfig
+    -- , layoutHook = Docks.avoidStruts $ myLayout
     , logHook = Log.dynamicLogWithPP Log.xmobarPP
         { Log.ppOutput = hPutStrLn xmproc
         , Log.ppTitle = Log.xmobarColor "green" "" . Log.shorten 50
@@ -34,4 +36,21 @@ main = do
 
     -- toggle showing xmobar
     , ((mod4Mask, xK_b), sendMessage Docks.ToggleStruts)
+    , ((mod4Mask .|. shiftMask, xK_b), withFocused NoBorders.toggleBorder)
     ]
+
+
+-- myLayout =
+--   tiled ||| Mirror tiled ||| NoBorders.noBorders Full
+--   where
+--     -- default tiling algorithm partitions the screen into two panes
+--     tiled   = Tall nmaster delta ratio
+--  
+--     -- The default number of windows in the master pane
+--     nmaster = 1
+--  
+--     -- Default proportion of screen occupied by master pane
+--     ratio   = 1/2
+--  
+--     -- Percent of screen to increment by when resizing panes
+--     delta = 3/100
