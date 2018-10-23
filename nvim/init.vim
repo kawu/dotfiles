@@ -18,7 +18,7 @@ set number
 set showmode
 set smartcase
 set smarttab
-set smartindent
+" set smartindent
 set autoindent
 set expandtab
 set shiftwidth=2

@@ -9,6 +9,7 @@ case "$STARTUP" in
     trayer --edge top \
      --SetDockType true --SetPartialStrut true \
      --expand true \
+     --monitor primary \
      --align right \
      --width 10 \
      --height 17 \

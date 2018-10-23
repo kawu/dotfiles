@@ -33,6 +33,7 @@ main = do
     , ((0, XF86.xF86XK_AudioMute), spawn "amixer -D pulse set Master 1+ toggle")
 
     , ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
+    , ((mod4Mask .|. shiftMask, xK_s), spawn "systemctl suspend")
 
     -- toggle showing xmobar
     , ((mod4Mask, xK_b), sendMessage Docks.ToggleStruts)
