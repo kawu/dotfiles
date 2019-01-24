@@ -1,0 +1,39 @@
+#!/bin/bash
+
+usage()
+{
+script=${0##*/}
+echo
+echo "Invalid usage of ${script}!"
+echo "  $1"
+echo "----------------"
+echo "$script on     : turn DP on"
+echo "$script off    : turn DP off"
+# echo "$script setup  : setup DP"
+echo "----------------"
+echo
+
+exit 1
+}
+
+case "$1" in
+  off)
+    xrandr --output DP-1 --off
+    ;;
+  on)
+    # xrandr --output DP-1 --mode "1440x900" --same-as eDP-1 # --transform 1,0,0,0,1,0,0,0,1
+    xrandr --output eDP-1 --newmode "1440x900"  106.47  1440 1520 1672 1904  900 901 904 932  -HSync +Vsync
+    xrandr --output eDP-1 --mode "1440x900"
+    xrandr --output DP-1 --mode "1440x900"
+    xrandr --output DP-1 --same-as eDP-1 # --transform 1,0,0,0,1,0,0,0,1
+    ;;
+#  setup)
+#    # cvt:
+#    xrandr --output DP-1 --newmode "1920x1200"  193.25  1920 2056 2256 2592  1200 1203 1209 1245 -hsync +vsync
+#    # # gtf:
+#    # xrandr --output DP-1 --newmode "1920x1200"  172.80  1920 2040 2248 2576  1080 1081 1084 1118  -HSync +Vsync
+#    xrandr --addmode DP-1 "1920x1200"
+#    ;;
+  *)
+    usage "invalid argument"
+esac

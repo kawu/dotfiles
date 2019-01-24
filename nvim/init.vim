@@ -14,7 +14,7 @@ syntax on
 filetype plugin indent on
 
 set nocompatible
-set number
+" set number
 set showmode
 set smartcase
 set smarttab
