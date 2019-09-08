@@ -20,8 +20,8 @@ case "$1" in
     xrandr --output DP-1 --off
     ;;
   on)
-    # xrandr --output DP-1 --mode "1920x1200" --right-of eDP-1 --transform 1,0,-5,0,1,0,0,0,1
-    xrandr --output DP-1 --mode "1920x1200" --right-of eDP-1 --transform 1,0,0,0,1,0,0,0,1
+    xrandr --output DP-1 --mode "1920x1200" --right-of eDP-1 --transform 1,0,-5,0,1,0,0,0,1
+    # xrandr --output DP-1 --mode "1920x1200" --right-of eDP-1 --transform 1,0,0,0,1,0,0,0,1
     # xrandr --output DP-1 --auto --above eDP-1
     # xrandr --output DP-1 --above eDP-1
     ;;
