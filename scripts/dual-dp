@@ -20,14 +20,15 @@ case "$1" in
     xrandr --output DP-1 --off
     ;;
   on)
-    xrandr --output DP-1 --mode "1920x1200" --right-of eDP-1 --transform 1,0,-5,0,1,0,0,0,1
+    # xrandr --output DP-1 --mode "1920x1200" --right-of eDP-1 --transform 1,0,-5,0,1,0,0,0,1
+    xrandr --output DP-1 --mode "1920x1200" --right-of eDP-1
     # xrandr --output DP-1 --mode "1920x1200" --right-of eDP-1 --transform 1,0,0,0,1,0,0,0,1
     # xrandr --output DP-1 --auto --above eDP-1
     # xrandr --output DP-1 --above eDP-1
     ;;
   setup)
     # cvt:
-    xrandr --output DP-1 --newmode "1920x1200"  193.25  1920 2056 2256 2592  1200 1203 1209 1245 -hsync +vsync
+    xrandr --output DP-1 --newmode "1920x1200" 193.25  1920 2056 2256 2592  1200 1203 1209 1245 -hsync +vsync
     # # gtf:
     # xrandr --output DP-1 --newmode "1920x1200"  172.80  1920 2040 2248 2576  1080 1081 1084 1118  -HSync +Vsync
     xrandr --addmode DP-1 "1920x1200"

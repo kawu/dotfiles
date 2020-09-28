@@ -4,39 +4,51 @@ case "$STARTUP" in
   xmonad-session) 
     # Load resources
     xrdb -merge .Xresources
+
+    # UPDATE 28.09.2020: running apps on startupt migrated to the XMonad
+    # configuration file (~/.xmonad/xmonad.hs)
      
-    # Set up an icon tray
-    trayer --edge top \
-     --SetDockType true --SetPartialStrut true \
-     --expand true \
-     --monitor primary \
-     --align right \
-     --width 10 \
-     --height 17 \
-     --alpha 0 \
-     --tint 0x0 \
-     --transparent true &
-    
-    # --tint 0x191970 \
-    # --height 12 &
-    # --transparent true \
-    # --align right \
-    # --width 10 \
+#     # Set up an icon tray for each monitor
+#     screenNum=$(xrandr -q | grep ' connected' -c)
+#     for ((i=0 ; i<screenNum ; i++)); do
+#     # for i in $(seq 0 "$screenNum"); do
+#       trayer --edge top \
+#        --SetDockType true --SetPartialStrut true \
+#        --expand true \
+#        --monitor "$i" \
+#        --align right \
+#        --width 10 \
+#        --height 17 \
+#        --alpha 0 \
+#        --tint 0x0 \
+#        --transparent true &
+#     done
+
+#     trayer --edge top \
+#      --SetDockType true --SetPartialStrut true \
+#      --expand true \
+#      --monitor primary \
+#      --align right \
+#      --width 10 \
+#      --height 17 \
+#      --alpha 0 \
+#      --tint 0x0 \
+#      --transparent true &
      
     # Set the background color<
-    feh --bg-scale /usr/share/backgrounds/Beaver_Wallpaper_Grey_4096x2304.png &
+    # feh --bg-scale /usr/share/backgrounds/gnome/Icescape.jpg &
     # xsetroot -solid midnightblue
     
     # Start udiskie to handle media
-    udiskie --tray &
+    # udiskie --tray &
      
     # Screen saver
-    xscreensaver -no-splash &
+    # xscreensaver -no-splash &
      
-    # Wifi applet
-    if [ -x /usr/bin/nm-applet ] ; then
-       nm-applet --sm-disable &
-    fi
+#     # Wifi applet
+#     if [ -x /usr/bin/nm-applet ] ; then
+#        nm-applet --sm-disable &
+#     fi
      
     # if [ -x /usr/bin/xfce4-power-manager ] ; then
     #    sleep 3
