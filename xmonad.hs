@@ -22,6 +22,7 @@ myStartupHook screenNum = do
   spawnOnce "udiskie --tray &"
   spawnOnce "feh --bg-scale /usr/share/backgrounds/gnome/Icescape.jpg &"
   spawnOnce "volumeicon &"
+  -- spawnOnce "blueman-applet &"
   -- Do not use the main (laptop) monitor in case there's another one available
   spawnOnce $ unwords
     [ "trayer --edge top --align right --height 17 --width 10 --SetDockType true --SetPartialStrut true --expand true"
