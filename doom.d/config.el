@@ -3,24 +3,24 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-;; ;; Python
-;; (use-package conda
-;;   :ensure t
-;;   :init
-;;   ;; (custom-set-variables
-;;   ;;  '(conda-anaconda-home "/opt/conda"))
-;;   (setq conda-env-home-directory (expand-file-name "~/.conda")
-;;         conda-anaconda-home "/opt/conda")
-;;   ;; (setq conda-env-subdirectory "envs")
-;; )
 
 ;; Haskell
 (use-package lsp-haskell
  :ensure t
  :config
  (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
+ (setq lsp-haskell-server-wrapper-function
+  (lambda (argv)
+   (append
+    (append (list "nix-shell" "-I" "." "--command" )
+            (list (mapconcat 'identity argv " "))
+            )
+    (list (concat (lsp-haskell--get-root) "/ide.nix"))
+   )
+  )
+ )
  ;; Comment/uncomment this line to see interactions between lsp client/server.
- ;;(setq lsp-log-io t)
+ (setq lsp-log-io t)
 )
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
@@ -71,11 +71,3 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
-
-;; (map! :leader
-;;       :desc "Trigger display hover popup"
-;;       "a t" #'lsp-ui-doc-show)
-;;
-;; (map! :leader
-;;       :desc "Trigger display hover popup"
-;;       "a g" #'lsp-ui-doc-glance)
