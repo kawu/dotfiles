@@ -2,12 +2,12 @@
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
 
-call plug#begin('~/.local/share/nvim/plugged')
-
-" Toggle comments
-" Plug 'preservim/nerdcommenter'
-
-call plug#end()
+" call plug#begin('~/.local/share/nvim/plugged')
+"
+" " Toggle comments
+" " Plug 'preservim/nerdcommenter'
+"
+" call plug#end()
 
 
 syntax on
