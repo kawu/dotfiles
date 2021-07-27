@@ -13,9 +13,21 @@ import qualified XMonad.Actions.NoBorders as NoBorders
 
 import System.IO (hPutStrLn)
 
+setDualScreen :: X ()
+setDualScreen = do
+  spawnOnce "xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --mode 1920x1080 --pos 1920x0 --rotate normal"
+
+setSingleScreen :: X ()
+setSingleScreen = do
+  spawnOnce "xrandr --output eDP-1 --primary --mode 1920x1200 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off"
 
 myStartupHook :: Int -> X ()
 myStartupHook screenNum = do
+
+  if screenNum > 1
+    then setDualScreen
+    else setSingleScreen
+
   -- spawnOnce "nitrogen --restore &"
   -- spawnOnce "picom &"
   spawnOnce "nm-applet &"
@@ -26,8 +38,10 @@ myStartupHook screenNum = do
   -- spawnOnce "blueman-applet &"
   -- Do not use the main (laptop) monitor in case there's another one available
   spawnOnce $ unwords
-    [ "trayer --edge top --align right --height 34 --width 10 --SetDockType true --SetPartialStrut true --expand true"
+    -- [ "trayer --edge top --align right --height 34 --width 10 --SetDockType true --SetPartialStrut true --expand true"
+    [ "trayer --edge top --align right --height 17 --width 10 --SetDockType true --SetPartialStrut true --expand true"
     , "--monitor", show $ if screenNum > 1 then 1 else 0 :: Int
+    , "--monitor 0"
     , "--transparent true --alpha 0 --tint 0x0 &"
     ]
     -- --padding 6 --widthtype request
@@ -59,8 +73,8 @@ main = do
     `additionalKeys`
     [
     -- function keys
-      ((0, XF86.xF86XK_MonBrightnessUp), spawn "sudo sysbacklight up")
-    , ((0, XF86.xF86XK_MonBrightnessDown), spawn "sudo sysbacklight down")
+      ((0, XF86.xF86XK_MonBrightnessUp), spawn "sysbacklight up")
+    , ((0, XF86.xF86XK_MonBrightnessDown), spawn "sysbacklight down")
 
     , ((0, XF86.xF86XK_AudioLowerVolume), spawn "amixer set Master 1%-")
     , ((0, XF86.xF86XK_AudioRaiseVolume), spawn "amixer set Master 1%+")
@@ -73,6 +87,10 @@ main = do
     -- toggle showing xmobar
     , ((mod4Mask, xK_b), sendMessage Docks.ToggleStruts)
     , ((mod4Mask .|. shiftMask, xK_b), withFocused NoBorders.toggleBorder)
+
+    -- backlight again
+    , ((mod4Mask .|. shiftMask, xK_k), spawn "sysbacklight up")
+    , ((mod4Mask .|. shiftMask, xK_j), spawn "sysbacklight down")
     ]
 
 

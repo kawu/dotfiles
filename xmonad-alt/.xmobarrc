@@ -1,8 +1,8 @@
-Config { font = "-*-Fixed-Bold-R-Normal-*-26-*-*-*-*-*-*-*"
+Config { font = "-*-Fixed-Bold-R-Normal-*-13-*-*-*-*-*-*-*"
        , bgColor = "black"
        , fgColor = "grey"
-       -- , position = TopW L 90
-       , position = Static { xpos = 0, ypos = 0, width = 3456, height = 34 }
+       , position = TopW L 90
+       -- , position = Static { xpos = 0, ypos = 0, width = 3456, height = 34 }
        , lowerOnStart = True
        , commands = [ Run Weather "EDDL" ["-t","<tempC>C","-L","18","-H","25","--normal","green","--high","red","--low","lightblue"] 36000
                     , Run Cpu ["-L","3","-H","50","--normal","green","--high","red"] 10
