@@ -44,6 +44,13 @@ myStartupHook screenNum = do
     , "--monitor 0"
     , "--transparent true --alpha 0 --tint 0x0 &"
     ]
+
+  -- set up screenlock
+  spawnOnce "xautolock -time 10 -locker slock &"
+
+  -- TOOD: in case of "soft xmonad reload" (mask + Q), all the commands above
+  -- are re-run I think.  This is not what we want I guess?
+
     -- --padding 6 --widthtype request
   -- spawnOnce "/usr/bin/emacs --daemon &"
   -- -- spawnOnce "kak -d -s mysession &"
@@ -81,16 +88,17 @@ main = do
     , ((0, XF86.xF86XK_AudioMute), spawn "amixer set Master toggle")
     -- , ((0, XF86.xF86XK_AudioMute), spawn "amixer -D pulse set Master 1+ toggle")
 
-    , ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
-    , ((mod4Mask .|. shiftMask, xK_s), spawn "systemctl suspend")
+    -- , ((mod4Mask .|. shiftMask, xK_z), spawn "xscreensaver-command -lock; xset dpms force off")
+    , ((mod4Mask .|. shiftMask, xK_z), spawn "slock")
+    -- , ((mod4Mask .|. shiftMask, xK_s), spawn "systemctl suspend")
 
     -- toggle showing xmobar
     , ((mod4Mask, xK_b), sendMessage Docks.ToggleStruts)
     , ((mod4Mask .|. shiftMask, xK_b), withFocused NoBorders.toggleBorder)
 
-    -- backlight again
-    , ((mod4Mask .|. shiftMask, xK_k), spawn "sysbacklight up")
-    , ((mod4Mask .|. shiftMask, xK_j), spawn "sysbacklight down")
+    -- -- backlight again
+    -- , ((mod4Mask .|. shiftMask, xK_k), spawn "sysbacklight up")
+    -- , ((mod4Mask .|. shiftMask, xK_j), spawn "sysbacklight down")
     ]
 
 
